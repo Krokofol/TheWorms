@@ -44,6 +44,7 @@
         <Compile Include="src\environment\objects\actions\Action.cs" />
         <Compile Include="src\environment\objects\actions\Direction.cs" />
         <Compile Include="src\environment\objects\actions\Move.cs" />
+        <Compile Include="src\environment\objects\Food.cs" />
         <Compile Include="src\environment\objects\Worm.cs" />
         <Compile Include="src\environment\Time.cs" />
         <Compile Include="src\WormsGod.cs" />

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TheWorms_CS_lab.environment.objects;
 
@@ -50,11 +51,12 @@ namespace TheWorms_CS_lab.environment
             {
                 environmentObject.Update();
             }
-
+            _objects.RemoveWhere(someObject => someObject.IsOutdated());
+            
             return $"{WormsString()}";
         }
 
-        public static string WormsString()
+        private static string WormsString()
         { 
             StringBuilder result = new StringBuilder("Worms:[");
             foreach (var environmentObject in _objects)
@@ -67,6 +69,11 @@ namespace TheWorms_CS_lab.environment
             result.Append("]");
             
             return result.ToString();
+        }
+
+        public static EnvironmentObject FindInThisPlace(int posX, int posY)
+        {
+            return _objects.First(someObject => someObject.PosX == posX && someObject.PosY == posY);
         }
     }
 }

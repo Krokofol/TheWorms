@@ -8,14 +8,11 @@ namespace TheWorms_CS_lab.environment.objects
         private int _directionIndex;
         
         private const string Name = "John";
-
-        private int _lifeEnergy;
         
         private static readonly List<Direction> Directions = new List<Direction>();
 
         public Worm (int posX, int posY) : base(posX, posY)
         {
-            _lifeEnergy = 10;
             _directionIndex = 0;
             Directions.Add(Direction.Down);
             Directions.Add(Direction.Down);
@@ -32,7 +29,7 @@ namespace TheWorms_CS_lab.environment.objects
             return $"{Name}{base.ToString()}";
         }
 
-        public override void Update()
+        public override void Update() 
         {
             if (PosX == 0 && PosY == 0)
             {
@@ -44,14 +41,17 @@ namespace TheWorms_CS_lab.environment.objects
             {
                 _directionIndex = 1;
             }
+
             if (PosX == 1 && PosY == 0)
             {
                 _directionIndex = 5;
             }
+
             if (PosX == 0 && PosY == 1)
             {
                 _directionIndex = 7;
             }
+
             if (PosX == 0 && PosY == -1)
             {
                 _directionIndex = 3;
@@ -60,7 +60,7 @@ namespace TheWorms_CS_lab.environment.objects
             new Move(this).DoAction(Directions[_directionIndex]);
             _directionIndex++;
             _directionIndex = _directionIndex % 8;
-            _lifeEnergy--;
+            base.Update();
         }
     }
 }
