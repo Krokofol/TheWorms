@@ -22,7 +22,7 @@ namespace TheWorms_CS_lab.assistant
                 if (result == "" && defaultValue != null)
                 {
                     result = defaultValue;
-                    Console.WriteLine();
+                    Console.WriteLine(defaultValue);
                 }
             } while (!tester.IsMatch(result));
             

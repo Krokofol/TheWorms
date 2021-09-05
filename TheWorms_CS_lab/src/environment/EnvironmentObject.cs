@@ -24,6 +24,11 @@ namespace TheWorms_CS_lab.environment
         {
             return _leftTurns <= 0;
         }
+
+        public void Assimilate()
+        {
+            _leftTurns += 10;
+        }
         
         public virtual void Update()
         {

@@ -8,11 +8,14 @@ namespace TheWorms_CS_lab.environment
 {
     public static class LandSpace
     {
-        private static HashSet<EnvironmentObject> _objects;
+        private static Random _generator;
+        
+        private static List<EnvironmentObject> _objects;
         
         public static void CreateLandSpace()
         {
-            _objects = new HashSet<EnvironmentObject>();
+            _generator = new Random(DateTime.Now.Millisecond);
+            _objects = new List<EnvironmentObject>();
         }
 
         public static void CreateWorms(int wormsCount)
@@ -47,33 +50,105 @@ namespace TheWorms_CS_lab.environment
 
         public static string Update()
         {
+            CreateFood();
             foreach (var environmentObject in _objects)
             {
                 environmentObject.Update();
             }
-            _objects.RemoveWhere(someObject => someObject.IsOutdated());
+            Assimilate();
+            _objects.RemoveAll(someObject => someObject.IsOutdated());
             
             return $"{WormsString()}";
         }
 
         private static string WormsString()
         { 
-            StringBuilder result = new StringBuilder("Worms:[");
+            StringBuilder wormsString = new StringBuilder("Worms:[");
+            StringBuilder foodsString = new StringBuilder("Food:[");
             foreach (var environmentObject in _objects)
             {
                 if (environmentObject is Worm)
                 {
-                    result.Append(environmentObject);
+                    wormsString.Append(environmentObject);
+                }
+                if (environmentObject is Food)
+                {
+                    foodsString.Append(environmentObject);
                 }
             }
-            result.Append("]");
+            wormsString.Append("]");
+            foodsString.Append("]");
             
-            return result.ToString();
+            return $"{wormsString}, {foodsString}";
         }
 
         public static EnvironmentObject FindInThisPlace(int posX, int posY)
         {
             return _objects.FirstOrDefault(someObject => someObject.PosX == posX && someObject.PosY == posY);
+        }
+        
+        private static int NextNormal(this Random r, double mu = 0, double sigma = 1)
+        {
+            var u1 = r.NextDouble();
+            var u2 = r.NextDouble();
+            var randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+            var randNormal = mu + sigma * randStdNormal;
+            return (int)Math.Round(randNormal);
+        }
+
+        private static void CreateFood()
+        {
+            int foodPosX;
+            int foodPosY;
+            do
+            {
+                foodPosX = NextNormal(_generator);
+                foodPosY = NextNormal(_generator);
+            } while (FindInThisPlace(foodPosX, foodPosY) != null);
+
+            Food newFood = new Food(foodPosX, foodPosY);
+            _objects.Add(newFood);
+        }
+
+        public static Food NearestFood(int startPosX, int startPosY)
+        {
+            List<EnvironmentObject> foods = _objects.Where(someObject => someObject is Food).ToList();
+            EnvironmentObject result = foods.First();
+            foreach (var environmentObject in foods)
+            {
+                if (startPosX - result.PosX > startPosX - environmentObject.PosX &&
+                    startPosY - result.PosY > startPosY - environmentObject.PosY)
+                {
+                    result = environmentObject;
+                }
+            }
+            return (Food) result;
+        }
+
+        private static void Assimilate()
+        {
+            List<EnvironmentObject> worms = _objects.Where(someObject => someObject is Worm).ToList();
+            List<EnvironmentObject> foods = _objects.Where(someObject => someObject is Food).ToList();
+            List<EnvironmentObject> ateFood = new List<EnvironmentObject>();
+            foreach (EnvironmentObject worm in worms)
+            {
+                EnvironmentObject result = null;
+                foreach (EnvironmentObject food in foods)
+                {
+                    if (food.PosX == worm.PosX && food.PosY == worm.PosY)
+                    {
+                        result = food;
+                        break;
+                    }
+                }
+                if (result != null)
+                {
+                    foods.Remove(result);
+                    ateFood.Add(result);
+                    worm.Assimilate();
+                }
+            }
+            _objects.RemoveAll(someObject => ateFood.Contains(someObject));
         }
     }
 }

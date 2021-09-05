@@ -1,27 +1,13 @@
-using System.Collections.Generic;
 using TheWorms_CS_lab.environment.objects.actions;
 
 namespace TheWorms_CS_lab.environment.objects
 {
     public class Worm : EnvironmentObject
     {
-        private int _directionIndex;
-        
         private const string Name = "John";
         
-        private static readonly List<Direction> Directions = new List<Direction>();
-
         public Worm (int posX, int posY) : base(posX, posY)
         {
-            _directionIndex = 0;
-            Directions.Add(Direction.Down);
-            Directions.Add(Direction.Down);
-            Directions.Add(Direction.Right);
-            Directions.Add(Direction.Right);
-            Directions.Add(Direction.Up);
-            Directions.Add(Direction.Up);
-            Directions.Add(Direction.Left);
-            Directions.Add(Direction.Left);
         }
 
         public override string ToString()
@@ -29,37 +15,27 @@ namespace TheWorms_CS_lab.environment.objects
             return $"{Name}{base.ToString()}";
         }
 
-        public override void Update() 
+        public override void Update()
         {
-            if (PosX == 0 && PosY == 0)
+            Food nearestFood = LandSpace.NearestFood(PosX, PosY);
+            Direction direction = Direction.Up;
+            if (nearestFood.PosX > PosX)
             {
-                new Move(this).DoAction(null);
-                return;
+                direction = Direction.Right;
             }
-
-            if (PosX == -1 && PosY == 0)
+            if (nearestFood.PosX < PosX)
             {
-                _directionIndex = 1;
+                direction = Direction.Left;
             }
-
-            if (PosX == 1 && PosY == 0)
+            if (nearestFood.PosY > PosY)
             {
-                _directionIndex = 5;
+                direction = Direction.Up;
             }
-
-            if (PosX == 0 && PosY == 1)
+            if (nearestFood.PosY < PosY)
             {
-                _directionIndex = 7;
+                direction = Direction.Down;
             }
-
-            if (PosX == 0 && PosY == -1)
-            {
-                _directionIndex = 3;
-            }
-
-            new Move(this).DoAction(Directions[_directionIndex]);
-            _directionIndex++;
-            _directionIndex = _directionIndex % 8;
+            new Move(this).DoAction(direction);
             base.Update();
         }
     }
