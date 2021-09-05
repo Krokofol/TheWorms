@@ -73,7 +73,7 @@ namespace TheWorms_CS_lab.environment
 
         public static EnvironmentObject FindInThisPlace(int posX, int posY)
         {
-            return _objects.First(someObject => someObject.PosX == posX && someObject.PosY == posY);
+            return _objects.FirstOrDefault(someObject => someObject.PosX == posX && someObject.PosY == posY);
         }
     }
 }

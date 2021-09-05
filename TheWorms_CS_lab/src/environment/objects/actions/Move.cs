@@ -39,7 +39,8 @@ namespace TheWorms_CS_lab.environment.objects.actions
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (LandSpace.FindInThisPlace(newPosX, newPosY) is Worm)
+            EnvironmentObject environmentObject = LandSpace.FindInThisPlace(newPosX, newPosY);
+            if (environmentObject != null && environmentObject is Worm)
             {
                 return;
             }
