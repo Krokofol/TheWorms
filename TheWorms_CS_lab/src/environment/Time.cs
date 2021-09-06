@@ -34,7 +34,6 @@ namespace TheWorms_CS_lab.environment
                     numString.Append(i);
                     Console.WriteLine($"{numString}: {LandSpace.Update()}");
                     keyPressed = Console.KeyAvailable;
-                    Thread.Sleep(200);
                 } while (!keyPressed && i < LoopsCount);
 
                 if (keyPressed)
