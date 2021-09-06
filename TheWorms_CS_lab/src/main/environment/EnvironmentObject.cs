@@ -32,7 +32,6 @@ namespace TheWorms_CS_lab.environment
         
         public virtual void Update()
         {
-            LeftTurns--;
         }
     }
 }

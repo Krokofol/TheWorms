@@ -4,23 +4,11 @@ namespace TheWorms_CS_lab.environment.objects.actions
 {
     public class Move : Action
     {
-        private readonly Worm _worm;
-        
-        private static readonly Random Generator = new Random(DateTime.Now.Millisecond);
-        
         public override void DoAction(Direction? direction)
         {
-            int newPosX = _worm.PosX;
-            int newPosY = _worm.PosY;
-            Direction chooseDirection;
-            if (direction != null)
-            {
-                chooseDirection = (Direction) direction;
-            }
-            else
-            {
-                chooseDirection = ChooseDirection();
-            }
+            int newPosX = Worm.PosX;
+            int newPosY = Worm.PosY;
+            Direction chooseDirection = direction ?? DirectionGenerator.Generate();
             switch (chooseDirection)
             {
                 case Direction.Up:
@@ -44,19 +32,14 @@ namespace TheWorms_CS_lab.environment.objects.actions
             {
                 return;
             }
-            
-            _worm.PosX = newPosX;
-            _worm.PosY = newPosY;
+
+            Worm.LeftTurns--;
+            Worm.PosX = newPosX;
+            Worm.PosY = newPosY;
         }
 
-        public Move(Worm worm)
+        public Move(Worm worm) : base(worm)
         {
-            _worm = worm;
-        }
-
-        public Direction ChooseDirection()
-        {
-            return (Direction) Generator.Next(0, 3);
         }
     }
 }

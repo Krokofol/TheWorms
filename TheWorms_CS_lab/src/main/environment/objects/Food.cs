@@ -10,5 +10,10 @@ namespace TheWorms_CS_lab.environment.objects
         {
             return $"({PosX}, {PosY})";
         }
+
+        public override void Update()
+        {
+            LeftTurns--;
+        }
     }
 }

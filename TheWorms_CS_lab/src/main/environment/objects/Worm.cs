@@ -4,7 +4,7 @@ namespace TheWorms_CS_lab.environment.objects
 {
     public class Worm : EnvironmentObject
     {
-        private const string Name = "John";
+        private readonly string _name = NameGenerator.generateName();
         
         public Worm (int posX, int posY) : base(posX, posY)
         {
@@ -12,11 +12,35 @@ namespace TheWorms_CS_lab.environment.objects
 
         public override string ToString()
         {
-            return $"{Name}{base.ToString()}";
+            return $"{_name}{base.ToString()}";
         }
 
         public override void Update()
         {
+            if (LeftTurns > 20)
+            {
+                Multiply multiply = new Multiply(this);
+                if (LandSpace.FindInThisPlace(PosX, PosY + 1) == null)
+                {
+                    multiply.DoAction(Direction.Up);
+                    return;
+                }
+                if (LandSpace.FindInThisPlace(PosX, PosY - 1) == null)
+                {
+                    multiply.DoAction(Direction.Down);
+                    return;
+                }
+                if (LandSpace.FindInThisPlace(PosX - 1, PosY) == null)
+                {
+                    multiply.DoAction(Direction.Left);
+                    return;
+                }
+                if (LandSpace.FindInThisPlace(PosX + 1, PosY) == null)
+                {
+                    multiply.DoAction(Direction.Right);
+                    return;
+                }
+            }
             Food nearestFood = LandSpace.NearestFood(PosX, PosY);
             Direction direction = Direction.Up;
             if (nearestFood.PosX > PosX)

@@ -38,17 +38,20 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="src\assistant\Negotiator.cs" />
-        <Compile Include="src\environment\EnvironmentObject.cs" />
-        <Compile Include="src\environment\LandSpace.cs" />
-        <Compile Include="src\environment\objects\actions\Action.cs" />
-        <Compile Include="src\environment\objects\actions\Direction.cs" />
-        <Compile Include="src\environment\objects\actions\Move.cs" />
-        <Compile Include="src\environment\objects\Food.cs" />
-        <Compile Include="src\environment\objects\Worm.cs" />
-        <Compile Include="src\environment\Time.cs" />
-        <Compile Include="src\WormsGod.cs" />
-        <Compile Include="TheWormsApplication.cs" />
+        <Compile Include="src\main\assistant\DirectionGenerator.cs" />
+        <Compile Include="src\main\assistant\NameGenerator.cs" />
+        <Compile Include="src\main\assistant\Negotiator.cs" />
+        <Compile Include="src\main\environment\EnvironmentObject.cs" />
+        <Compile Include="src\main\environment\LandSpace.cs" />
+        <Compile Include="src\main\environment\objects\actions\Action.cs" />
+        <Compile Include="src\main\environment\objects\actions\Direction.cs" />
+        <Compile Include="src\main\environment\objects\actions\Move.cs" />
+        <Compile Include="src\main\environment\objects\actions\Multiply.cs" />
+        <Compile Include="src\main\environment\objects\Food.cs" />
+        <Compile Include="src\main\environment\objects\Worm.cs" />
+        <Compile Include="src\main\environment\Time.cs" />
+        <Compile Include="src\main\TheWormsApplication.cs" />
+        <Compile Include="src\main\WormsGod.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

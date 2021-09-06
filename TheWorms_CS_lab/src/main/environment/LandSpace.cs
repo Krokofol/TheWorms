@@ -11,7 +11,8 @@ namespace TheWorms_CS_lab.environment
         private static Random _generator;
         
         private static List<EnvironmentObject> _objects;
-        
+        private static List<EnvironmentObject> _newCreated;
+
         public static void CreateLandSpace()
         {
             _generator = new Random(DateTime.Now.Millisecond);
@@ -48,8 +49,14 @@ namespace TheWorms_CS_lab.environment
             _objects.Add(new Worm(posX, posY));
         }
 
+        public static void MultiplyWorm(int posX, int posY)
+        {
+            _newCreated.Add(new Worm(posX, posY));
+        }
+
         public static string Update()
         {
+            _newCreated = new List<EnvironmentObject>();
             CreateFood();
             foreach (var environmentObject in _objects)
             {
@@ -57,7 +64,10 @@ namespace TheWorms_CS_lab.environment
             }
             Assimilate();
             _objects.RemoveAll(someObject => someObject.IsOutdated());
-            
+            foreach (var environmentObject in _newCreated)
+            {
+                _objects.Add(environmentObject);
+            }
             return $"{BuildOutputString()}";
         }
 
@@ -65,6 +75,7 @@ namespace TheWorms_CS_lab.environment
         { 
             StringBuilder wormsString = new StringBuilder("Worms:[");
             StringBuilder foodsString = new StringBuilder("Food:[");
+            int wormsCount = 0;
             bool notFirstWorm = false;
             bool notFirstFood = false;
             foreach (var environmentObject in _objects)
@@ -75,6 +86,7 @@ namespace TheWorms_CS_lab.environment
                     {
                         wormsString.Append(", ");
                     }
+                    wormsCount++;
                     wormsString.Append(environmentObject);
                     notFirstWorm = true;
                 }
@@ -91,7 +103,7 @@ namespace TheWorms_CS_lab.environment
             wormsString.Append("]");
             foodsString.Append("]");
             
-            return $"{wormsString}, {foodsString}";
+            return $"({wormsCount}){wormsString}, {foodsString}";
         }
 
         public static EnvironmentObject FindInThisPlace(int posX, int posY)
