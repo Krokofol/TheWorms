@@ -4,10 +4,10 @@ namespace TheWorms_CS_lab.environment
 {
     public abstract class EnvironmentObject
     {
-        private int _leftTurns;
+        public int LeftTurns;
         public override string ToString()
         {
-            return $"-{_leftTurns} ({PosX}, {PosY})";
+            return $"-{LeftTurns} ({PosX}, {PosY})";
         }
 
         public int PosX { get; set; }
@@ -17,22 +17,22 @@ namespace TheWorms_CS_lab.environment
         {
             PosX = posX;
             PosY = posY;
-            _leftTurns = 10;
+            LeftTurns = 10;
         }
 
         public bool IsOutdated()
         {
-            return _leftTurns <= 0;
+            return LeftTurns <= 0;
         }
 
         public void Assimilate()
         {
-            _leftTurns += 10;
+            LeftTurns += 10;
         }
         
         public virtual void Update()
         {
-            _leftTurns--;
+            LeftTurns--;
         }
     }
 }

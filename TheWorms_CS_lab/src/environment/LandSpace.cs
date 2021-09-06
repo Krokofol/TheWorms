@@ -58,22 +58,34 @@ namespace TheWorms_CS_lab.environment
             Assimilate();
             _objects.RemoveAll(someObject => someObject.IsOutdated());
             
-            return $"{WormsString()}";
+            return $"{BuildOutputString()}";
         }
 
-        private static string WormsString()
+        private static string BuildOutputString()
         { 
             StringBuilder wormsString = new StringBuilder("Worms:[");
             StringBuilder foodsString = new StringBuilder("Food:[");
+            bool notFirstWorm = false;
+            bool notFirstFood = false;
             foreach (var environmentObject in _objects)
             {
                 if (environmentObject is Worm)
                 {
+                    if (notFirstWorm)
+                    {
+                        wormsString.Append(", ");
+                    }
                     wormsString.Append(environmentObject);
+                    notFirstWorm = true;
                 }
                 if (environmentObject is Food)
                 {
+                    if (notFirstFood)
+                    {
+                        foodsString.Append(", ");
+                    }
                     foodsString.Append(environmentObject);
+                    notFirstFood = true;
                 }
             }
             wormsString.Append("]");

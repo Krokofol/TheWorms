@@ -8,7 +8,7 @@ namespace TheWorms_CS_lab.environment.objects
 
         public override string ToString()
         {
-            return $"food-{base.ToString()}";
+            return $"({PosX}, {PosY})";
         }
     }
 }
