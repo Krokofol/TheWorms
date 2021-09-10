@@ -8,12 +8,7 @@ namespace TheWorms_CS_lab.environment
     public static class Time
     {
         private static Thread _passageOfTime;
-        private static readonly StreamWriter Writer = new StreamWriter(FileName);
-
         private const int LoopsCount = 100;
-        private const string FileName = "result.txt";
-        private const bool WriteInFile = true;
-        private const bool WriteInConsole = true;        
 
         public static void CreateTime()
         {
@@ -37,7 +32,8 @@ namespace TheWorms_CS_lab.environment
                         numString.Append("0");
                     }
                     numString.Append(i);
-                    Write($"{numString}: {LandSpace.Update()}");
+                    LandSpace.Update();
+                    Commentator.Print(i);
                     keyPressed = Console.KeyAvailable;
                 } while (!keyPressed && i < LoopsCount);
 
@@ -46,19 +42,6 @@ namespace TheWorms_CS_lab.environment
                     key = Console.ReadKey().Key;
                 }
             } while (key != ConsoleKey.Q && i < LoopsCount);
-        }
-        
-        private static void Write(string text)
-        {
-            if (WriteInConsole)
-            {
-                Console.WriteLine(text);
-            }
-            if (WriteInFile)
-            {
-                Writer.WriteLine(text);
-                Writer.Flush();
-            }
         }
     }
 }

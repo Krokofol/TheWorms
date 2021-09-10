@@ -38,6 +38,7 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="src\main\assistant\Commentator.cs" />
         <Compile Include="src\main\assistant\DirectionGenerator.cs" />
         <Compile Include="src\main\assistant\NameGenerator.cs" />
         <Compile Include="src\main\assistant\Negotiator.cs" />

@@ -54,7 +54,7 @@ namespace TheWorms_CS_lab.environment
             _newCreated.Add(new Worm(posX, posY));
         }
 
-        public static string Update()
+        public static void Update()
         {
             _newCreated = new List<EnvironmentObject>();
             CreateFood();
@@ -68,10 +68,9 @@ namespace TheWorms_CS_lab.environment
             {
                 _objects.Add(environmentObject);
             }
-            return $"{BuildOutputString()}";
         }
 
-        private static string BuildOutputString()
+        public static string ToString()
         { 
             StringBuilder wormsString = new StringBuilder("Worms:[");
             StringBuilder foodsString = new StringBuilder("Food:[");
