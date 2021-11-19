@@ -1,6 +1,4 @@
-using System.Data;
-
-namespace TheWorms_CS_lab.environment
+namespace TheWorms_CS_lab_Windows.environment
 {
     public abstract class EnvironmentObject
     {

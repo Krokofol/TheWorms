@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 
-namespace TheWorms_CS_lab.environment
+namespace TheWorms_CS_lab_Windows.environment
 {
     public static class Time
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using TheWorms_CS_lab.environment.objects.actions;
+using TheWorms_CS_lab_Windows.environment.objects.actions;
 
-namespace TheWorms_CS_lab.environment.objects
+namespace TheWorms_CS_lab_Windows.environment.objects
 {
     public class Worm : EnvironmentObject
     {

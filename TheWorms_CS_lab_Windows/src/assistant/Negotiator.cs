@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace TheWorms_CS_lab.assistant
+namespace TheWorms_CS_lab_Windows.assistant
 {
     public static class Negotiator
     {

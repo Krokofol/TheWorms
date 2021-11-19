@@ -1,6 +1,8 @@
-﻿namespace TheWorms_CS_lab
+﻿using TheWorms_CS_lab_Windows;
+
+namespace TheWorms_CS_lab_Windows
 {
-    internal static class TheWormsApplication
+    internal class TheWormsApplication
     {
         public static int Main(string[] args)
         {
