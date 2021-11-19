@@ -1,13 +1,12 @@
 using System;
-using System.Collections.Generic;
 
-namespace TheWorms_CS_lab
+namespace TheWorms_CS_lab_Windows.assistant
 {
-    public class NameGenerator
+    public static class NameGenerator
     {
         private static readonly Random Generator = new Random(DateTime.Now.Millisecond);
         
-        private static readonly string[] Names = new string[100] {
+        private static readonly string[] Names = {
             "James","John","Robert","Michael","William","David","Richard","Charles","Joseph	","Thomas","Christopher",
             "Daniel","Paul","Mark","Donald","George","Kenneth","Steven","Edward","Brian","Ronald","Anthony","Kevin",
             "Jason","Matthew","Danny","Timothy","Jose","Larry","Jeffrey","Frank","Scott","Eric","Stephen","Andrew",
@@ -18,8 +17,8 @@ namespace TheWorms_CS_lab
             "Martin","Ernest","Tony","Todd","Jesse","Craig","Alan","Shawn","Clarence","Stanley","Philip","Chris",
             "Johnny","Earl","Jimmy","Antonio",
         };
-
-        public static string generateName()
+        
+        public static string GenerateName()
         {
             int index = Generator.Next(0, 99);
             return Names[index];

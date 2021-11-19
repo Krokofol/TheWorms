@@ -1,4 +1,4 @@
-﻿namespace TheWorms_CS_lab
+﻿namespace TheWorms_CS_lab_Windows
 {
     internal static class TheWormsApplication
     {

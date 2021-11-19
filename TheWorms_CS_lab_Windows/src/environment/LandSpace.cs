@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TheWorms_CS_lab.environment.objects;
+using TheWorms_CS_lab_Windows.environment.objects;
 
-namespace TheWorms_CS_lab.environment
+namespace TheWorms_CS_lab_Windows.environment
 {
     public static class LandSpace
     {

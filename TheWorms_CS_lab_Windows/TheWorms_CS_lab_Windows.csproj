@@ -4,12 +4,12 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{863ECFBC-30C2-4A28-83DD-8AB15E82D810}</ProjectGuid>
+        <ProjectGuid>{EAB4586C-9818-4ADA-9060-E2C560F5485B}</ProjectGuid>
         <OutputType>Exe</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>TheWorms_CS_lab</RootNamespace>
-        <AssemblyName>TheWorms_CS_lab</AssemblyName>
-        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <RootNamespace>TheWorms_CS_lab_Windows</RootNamespace>
+        <AssemblyName>TheWorms_CS_lab_Windows</AssemblyName>
+        <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -38,22 +38,22 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="src\main\assistant\Commentator.cs" />
-        <Compile Include="src\main\assistant\DirectionGenerator.cs" />
-        <Compile Include="src\main\assistant\NameGenerator.cs" />
-        <Compile Include="src\main\assistant\Negotiator.cs" />
-        <Compile Include="src\main\environment\EnvironmentObject.cs" />
-        <Compile Include="src\main\environment\LandSpace.cs" />
-        <Compile Include="src\main\environment\objects\actions\Action.cs" />
-        <Compile Include="src\main\environment\objects\actions\Direction.cs" />
-        <Compile Include="src\main\environment\objects\actions\Move.cs" />
-        <Compile Include="src\main\environment\objects\actions\Multiply.cs" />
-        <Compile Include="src\main\environment\objects\Food.cs" />
-        <Compile Include="src\main\environment\objects\Worm.cs" />
-        <Compile Include="src\main\environment\Time.cs" />
-        <Compile Include="src\main\TheWormsApplication.cs" />
-        <Compile Include="src\main\WormsGod.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="src\assistant\Commentator.cs" />
+        <Compile Include="src\assistant\DirectionGenerator.cs" />
+        <Compile Include="src\assistant\NameGenerator.cs" />
+        <Compile Include="src\assistant\Negotiator.cs" />
+        <Compile Include="src\environment\EnvironmentObject.cs" />
+        <Compile Include="src\environment\LandSpace.cs" />
+        <Compile Include="src\environment\objects\actions\Action.cs" />
+        <Compile Include="src\environment\objects\actions\Direction.cs" />
+        <Compile Include="src\environment\objects\actions\Move.cs" />
+        <Compile Include="src\environment\objects\actions\Multiply.cs" />
+        <Compile Include="src\environment\objects\Food.cs" />
+        <Compile Include="src\environment\objects\Worm.cs" />
+        <Compile Include="src\environment\Time.cs" />
+        <Compile Include="src\WormsGod.cs" />
+        <Compile Include="TheWormsApplication.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

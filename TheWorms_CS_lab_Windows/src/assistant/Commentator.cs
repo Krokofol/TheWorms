@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using TheWorms_CS_lab.environment;
+using TheWorms_CS_lab_Windows.environment;
 
-namespace TheWorms_CS_lab
+namespace TheWorms_CS_lab_Windows.assistant
 {
     public static class Commentator
     {

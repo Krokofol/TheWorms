@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TheWorms_CS_lab")]
+[assembly: AssemblyTitle("TheWorms_CS_lab_Windows")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TheWorms_CS_lab")]
+[assembly: AssemblyProduct("TheWorms_CS_lab_Windows")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("863ECFBC-30C2-4A28-83DD-8AB15E82D810")]
+[assembly: Guid("EAB4586C-9818-4ADA-9060-E2C560F5485B")]
 
 // Version information for an assembly consists of the following four values:
 //

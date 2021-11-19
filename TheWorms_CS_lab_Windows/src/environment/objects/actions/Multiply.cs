@@ -1,6 +1,7 @@
 using System;
+using TheWorms_CS_lab_Windows.assistant;
 
-namespace TheWorms_CS_lab.environment.objects.actions
+namespace TheWorms_CS_lab_Windows.environment.objects.actions
 {
     public class Multiply : Action
     {

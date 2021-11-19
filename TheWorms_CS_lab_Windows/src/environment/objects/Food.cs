@@ -1,4 +1,4 @@
-namespace TheWorms_CS_lab.environment.objects
+namespace TheWorms_CS_lab_Windows.environment.objects
 {
     public class Food : EnvironmentObject
     {

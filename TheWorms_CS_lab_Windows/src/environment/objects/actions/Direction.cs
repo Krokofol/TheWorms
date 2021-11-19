@@ -1,4 +1,4 @@
-namespace TheWorms_CS_lab.environment.objects.actions
+namespace TheWorms_CS_lab_Windows.environment.objects.actions
 {
     public enum Direction
     {

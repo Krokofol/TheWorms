@@ -1,10 +1,11 @@
-using TheWorms_CS_lab.environment.objects.actions;
+using TheWorms_CS_lab_Windows.assistant;
+using TheWorms_CS_lab_Windows.environment.objects.actions;
 
-namespace TheWorms_CS_lab.environment.objects
+namespace TheWorms_CS_lab_Windows.environment.objects
 {
     public class Worm : EnvironmentObject
     {
-        private readonly string _name = NameGenerator.generateName();
+        private readonly string _name = NameGenerator.GenerateName();
         
         public Worm (int posX, int posY) : base(posX, posY)
         {

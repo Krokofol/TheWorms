@@ -1,9 +1,9 @@
 using System;
 using System.Text.RegularExpressions;
-using TheWorms_CS_lab.assistant;
-using TheWorms_CS_lab.environment;
+using TheWorms_CS_lab_Windows.assistant;
+using TheWorms_CS_lab_Windows.environment;
 
-namespace TheWorms_CS_lab
+namespace TheWorms_CS_lab_Windows
 {
     public static class WormsGod
     {

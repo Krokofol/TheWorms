@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWorms_CS_lab_Windows", "TheWorms_CS_lab_Windows\TheWorms_CS_lab_Windows.csproj", "{EAB4586C-9818-4ADA-9060-E2C560F5485B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAB4586C-9818-4ADA-9060-E2C560F5485B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAB4586C-9818-4ADA-9060-E2C560F5485B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAB4586C-9818-4ADA-9060-E2C560F5485B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB4586C-9818-4ADA-9060-E2C560F5485B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
