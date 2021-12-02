@@ -4,7 +4,7 @@
     {
         public static int Main(string[] args)
         {
-            WormsGod.DoGodsJob();
+            new WormsGod().DoGodsJob();
             return 0;
         }
     }

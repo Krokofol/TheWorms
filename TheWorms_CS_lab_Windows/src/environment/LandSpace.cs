@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TheWorms_CS_lab_Windows.environment.objects;
+using TheWorms_CS_lab_Windows.services;
 
 namespace TheWorms_CS_lab_Windows.environment
 {
-    public static class LandSpace
+    public class LandSpace
     {
-        private static Random _generator;
-        
-        private static List<EnvironmentObject> _objects;
-        private static List<EnvironmentObject> _newCreated;
+        private readonly List<EnvironmentObject> _objects;
+        private readonly NameService _nameService;
+        private readonly FoodService _foodService;
 
-        public static void CreateLandSpace()
+        private List<EnvironmentObject> _newCreated;
+     
+        public LandSpace()
         {
-            _generator = new Random(DateTime.Now.Millisecond);
             _objects = new List<EnvironmentObject>();
+            _nameService = new NameService();
+            _foodService = new FoodService();
         }
 
-        public static void CreateWorms(int wormsCount)
+        public void CreateWorms(int wormsCount)
         {
             if (wormsCount == 1)
             {
@@ -27,7 +30,7 @@ namespace TheWorms_CS_lab_Windows.environment
             }
         }
         
-        private static void CreateWorm(int fieldSizeX, int fieldSizeY)
+        private void CreateWorm(int fieldSizeX, int fieldSizeY)
         {
             Random generator = new Random(DateTime.Now.Millisecond);
             int posX;
@@ -38,7 +41,7 @@ namespace TheWorms_CS_lab_Windows.environment
                 posX = generator.Next(- fieldSizeX / 2, fieldSizeX / 2);
                 posY = generator.Next(- fieldSizeY / 2, fieldSizeY / 2);
                 spaceIsFree = true;
-                foreach (var environmentObject in LandSpace._objects)
+                foreach (var environmentObject in _objects)
                 {
                     if (environmentObject.PosX == posX && environmentObject.PosY == posY)
                     {
@@ -46,21 +49,20 @@ namespace TheWorms_CS_lab_Windows.environment
                     }
                 }
             } while (!spaceIsFree);
-            _objects.Add(new Worm(posX, posY));
+            _objects.Add(new Worm(posX, posY, _nameService.GetName("NoParent", 0), _nameService, new IntellectualService()));
         }
 
-        public static void MultiplyWorm(int posX, int posY)
-        {
-            _newCreated.Add(new Worm(posX, posY));
-        }
-
-        public static void Update()
+        public void Update(int turn)
         {
             _newCreated = new List<EnvironmentObject>();
             CreateFood();
             foreach (var environmentObject in _objects)
             {
-                environmentObject.Update();
+                EnvironmentObject updateResult = environmentObject.Update(turn);
+                if (updateResult != null)
+                {
+                    _newCreated.Add(updateResult);
+                }
             }
             Assimilate();
             _objects.RemoveAll(someObject => someObject.IsOutdated());
@@ -70,7 +72,7 @@ namespace TheWorms_CS_lab_Windows.environment
             }
         }
 
-        public static string ToString()
+        public override string ToString()
         { 
             StringBuilder wormsString = new StringBuilder("Worms:[");
             StringBuilder foodsString = new StringBuilder("Food:[");
@@ -105,50 +107,22 @@ namespace TheWorms_CS_lab_Windows.environment
             return $"({wormsCount}){wormsString}, {foodsString}";
         }
 
-        public static EnvironmentObject FindInThisPlace(int posX, int posY)
+        private EnvironmentObject FindInThisPlace(int posX, int posY)
         {
             return _objects.FirstOrDefault(someObject => someObject.PosX == posX && someObject.PosY == posY);
         }
-        
-        private static int NextNormal(this Random r, double mu = 0, double sigma = 1)
-        {
-            var u1 = r.NextDouble();
-            var u2 = r.NextDouble();
-            var randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
-            var randNormal = mu + sigma * randStdNormal;
-            return (int)Math.Round(randNormal);
-        }
 
-        private static void CreateFood()
+        private void CreateFood()
         {
-            int foodPosX;
-            int foodPosY;
-            do
+            Food food = _foodService.CreateFood();
+            while (FindInThisPlace(food.PosX, food.PosY) != null)
             {
-                foodPosX = NextNormal(_generator);
-                foodPosY = NextNormal(_generator);
-            } while (FindInThisPlace(foodPosX, foodPosY) != null);
-
-            Food newFood = new Food(foodPosX, foodPosY);
-            _objects.Add(newFood);
-        }
-
-        public static Food NearestFood(int startPosX, int startPosY)
-        {
-            List<EnvironmentObject> foods = _objects.Where(someObject => someObject is Food).ToList();
-            EnvironmentObject result = foods.First();
-            foreach (var environmentObject in foods)
-            {
-                if (startPosX - result.PosX > startPosX - environmentObject.PosX &&
-                    startPosY - result.PosY > startPosY - environmentObject.PosY)
-                {
-                    result = environmentObject;
-                }
+                food = _foodService.CreateFood();
             }
-            return (Food) result;
+            _objects.Add(food);
         }
 
-        private static void Assimilate()
+        private void Assimilate()
         {
             List<EnvironmentObject> worms = _objects.Where(someObject => someObject is Worm).ToList();
             List<EnvironmentObject> foods = _objects.Where(someObject => someObject is Food).ToList();

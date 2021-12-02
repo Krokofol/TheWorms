@@ -5,39 +5,44 @@ using TheWorms_CS_lab_Windows.environment;
 
 namespace TheWorms_CS_lab_Windows
 {
-    public static class WormsGod
+    public class WormsGod
     {
+        private LandSpace _landSpace;
+        private Time _time;
+        
         private const string Name = "Worms God";
 
-        public static void DoGodsJob()
+        public WormsGod() {}
+        
+        public void DoGodsJob()
         {
             CreateWorld();
             CreateLife();
             CreateTime();
-            Chill();
+            RunTime();
         }
 
-        private static void CreateWorld()
+        private void CreateWorld()
         {
-            LandSpace.CreateLandSpace();
+            _landSpace = new LandSpace();
         }
 
-        private static void CreateLife()
+        private void CreateLife()
         {
             Regex sizeRegex = new Regex("\\d+");
             string usersText = Negotiator.Talk(Name, "enter the worms count", sizeRegex, "1");
             int wormsCount = Int32.Parse(usersText);
-            LandSpace.CreateWorms(wormsCount);
+            _landSpace.CreateWorms(wormsCount);
         }
 
-        private static void CreateTime()
+        private void CreateTime()
         {
-            Time.CreateTime();
+            _time = new Time(_landSpace);
         }
 
-        private static void Chill()
+        private void RunTime()
         {
-            
+            _time.Run();
         }
     }
 }

@@ -5,7 +5,7 @@ namespace TheWorms_CS_lab_Windows.environment.objects.actions
 {
     public class Move : Action
     {
-        public override void DoAction(Direction? direction)
+        public override EnvironmentObject DoAction(Direction? direction = null)
         {
             int newPosX = Worm.PosX;
             int newPosY = Worm.PosY;
@@ -27,19 +27,15 @@ namespace TheWorms_CS_lab_Windows.environment.objects.actions
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            EnvironmentObject environmentObject = LandSpace.FindInThisPlace(newPosX, newPosY);
-            if (environmentObject != null && environmentObject is Worm)
-            {
-                return;
-            }
-
+            
             Worm.LeftTurns--;
             Worm.PosX = newPosX;
             Worm.PosY = newPosY;
+
+            return null;
         }
 
-        public Move(Worm worm) : base(worm)
+        public Move(Worm worm, int turn) : base(worm, turn)
         {
         }
     }

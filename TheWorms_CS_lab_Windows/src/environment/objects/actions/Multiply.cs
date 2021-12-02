@@ -5,8 +5,7 @@ namespace TheWorms_CS_lab_Windows.environment.objects.actions
 {
     public class Multiply : Action
     {
-        
-        public override void DoAction(Direction? direction)
+        public override EnvironmentObject DoAction(Direction? direction = null)
         {
             int newPosX = Worm.PosX;
             int newPosY = Worm.PosY;
@@ -28,18 +27,10 @@ namespace TheWorms_CS_lab_Windows.environment.objects.actions
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            EnvironmentObject environmentObject = LandSpace.FindInThisPlace(newPosX, newPosY);
-            if (environmentObject != null)
-            {
-                return;
-            }
-
             Worm.LeftTurns -= 10;
-            LandSpace.MultiplyWorm(newPosX, newPosY);
+            return new Worm(newPosX, newPosY, Worm.GetBabyName(Turn), Worm.GetNameService(), Worm.GetBrains());
         }
 
-        public Multiply(Worm worm) : base(worm)
-        {
-        }
+        public Multiply(Worm worm, int turn) : base(worm, turn) {}
     }
 }

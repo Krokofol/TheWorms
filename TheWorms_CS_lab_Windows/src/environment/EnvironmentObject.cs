@@ -5,7 +5,7 @@ namespace TheWorms_CS_lab_Windows.environment
         public int LeftTurns;
         public override string ToString()
         {
-            return $"-{LeftTurns} ({PosX}, {PosY})";
+            return $"-{LeftTurns.ToString()} ({PosX.ToString()}, {PosY.ToString()})";
         }
 
         public int PosX { get; set; }
@@ -28,8 +28,9 @@ namespace TheWorms_CS_lab_Windows.environment
             LeftTurns += 10;
         }
         
-        public virtual void Update()
+        public virtual EnvironmentObject Update(int turn)
         {
+            return null;
         }
     }
 }

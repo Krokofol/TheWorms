@@ -8,12 +8,13 @@ namespace TheWorms_CS_lab_Windows.environment.objects
 
         public override string ToString()
         {
-            return $"({PosX}, {PosY})";
+            return $"({PosX.ToString()}, {PosY.ToString()})";
         }
 
-        public override void Update()
+        public override EnvironmentObject Update(int turn)
         {
             LeftTurns--;
+            return null;
         }
     }
 }

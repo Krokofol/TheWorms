@@ -1,47 +1,50 @@
 using System;
 using System.Text;
-using System.Threading;
-using TheWorms_CS_lab_Windows.assistant;
+using TheWorms_CS_lab_Windows.services;
 
 namespace TheWorms_CS_lab_Windows.environment
 {
-    public static class Time
+    public class Time
     {
-        private static Thread _passageOfTime;
         private const int LoopsCount = 100;
+        private readonly LandSpace _landSpace;
+        private readonly ReportService _reportService;
 
-        public static void CreateTime()
+        public Time(
+            LandSpace landSpace = null,
+            ReportService reportService = null
+        )
         {
-            _passageOfTime = new Thread(Run);
-            _passageOfTime.Start();
+            _landSpace = landSpace ?? new LandSpace();
+            _reportService = reportService ?? new ReportService();
         }
 
-        private static void Run()
+        public void Run()
         {
-            int i = 0;
+            int turn = 0;
             ConsoleKey? key = null;
             do
             {
                 bool keyPressed;
                 do
                 {
-                    i++;
+                    turn++;
                     StringBuilder numString = new StringBuilder("Iteration ");
-                    for (int j = i.ToString().Length; j < LoopsCount.ToString().Length; j++)
+                    for (int j = turn.ToString().Length; j < LoopsCount.ToString().Length; j++)
                     {
                         numString.Append("0");
                     }
-                    numString.Append(i);
-                    LandSpace.Update();
-                    Commentator.Print(i);
+                    numString.Append(turn);
+                    _landSpace.Update(turn);
+                    _reportService.Log(turn, _landSpace);
                     keyPressed = Console.KeyAvailable;
-                } while (!keyPressed && i < LoopsCount);
+                } while (!keyPressed && turn < LoopsCount);
 
                 if (keyPressed)
                 {
                     key = Console.ReadKey().Key;
                 }
-            } while (key != ConsoleKey.Q && i < LoopsCount);
+            } while (key != ConsoleKey.Q && turn < LoopsCount);
         }
     }
 }
