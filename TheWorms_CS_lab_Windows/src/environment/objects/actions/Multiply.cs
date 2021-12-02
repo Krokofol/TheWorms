@@ -3,7 +3,7 @@ using TheWorms_CS_lab_Windows.assistant;
 
 namespace TheWorms_CS_lab_Windows.environment.objects.actions
 {
-    public class Multiply : Action
+    public class Multiply : Activity
     {
         public override EnvironmentObject DoAction(Direction? direction = null)
         {

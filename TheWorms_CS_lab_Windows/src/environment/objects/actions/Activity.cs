@@ -1,11 +1,11 @@
 namespace TheWorms_CS_lab_Windows.environment.objects.actions
 {
-    public abstract class Action
+    public abstract class Activity
     {
         protected readonly Worm Worm;
         protected readonly int Turn;
 
-        protected Action(Worm worm, int turn)
+        protected Activity(Worm worm, int turn)
         {
             Worm = worm;
             Turn = turn;

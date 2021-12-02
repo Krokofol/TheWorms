@@ -66,7 +66,10 @@ namespace TheWorms_CS_lab_Windows.environment
                 EnvironmentObject updateResult = environmentObject.Update(turn);
                 if (updateResult != null)
                 {
-                    _newCreated.Add(updateResult);
+                    if (FindInThisPlace(updateResult.PosX, updateResult.PosY) == null)
+                    {
+                        _newCreated.Add(updateResult);
+                    }
                 }
             }
             Assimilate();

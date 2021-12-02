@@ -1,7 +1,6 @@
 using System;
 using TheWorms_CS_lab_Windows.environment.objects.actions;
 using TheWorms_CS_lab_Windows.services;
-using Action = TheWorms_CS_lab_Windows.environment.objects.actions.Action;
 
 namespace TheWorms_CS_lab_Windows.environment.objects
 {
@@ -28,9 +27,9 @@ namespace TheWorms_CS_lab_Windows.environment.objects
             return MakeAction(turn, _intellectualService.CreateAction(LeftTurns, turn, this));
         }
 
-        private EnvironmentObject MakeAction(int turn, Action action, Direction? direction = null)
+        private EnvironmentObject MakeAction(int turn, Activity activity, Direction? direction = null)
         {
-            var result = action.DoAction(direction);
+            var result = activity.DoAction(direction);
             base.Update(turn);
             return result;
         }

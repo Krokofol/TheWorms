@@ -11,12 +11,12 @@ namespace TheWorms_CS_lab_Windows.environment
         private readonly ReportService _reportService;
 
         public Time(
-            LandSpace landSpace = null,
-            ReportService reportService = null
+            LandSpace landSpace,
+            ReportService reportService
         )
         {
-            _landSpace = landSpace ?? new LandSpace();
-            _reportService = reportService ?? new ReportService();
+            _landSpace = landSpace;
+            _reportService = reportService;
         }
 
         public void Run()

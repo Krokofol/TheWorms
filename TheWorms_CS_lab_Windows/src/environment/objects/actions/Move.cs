@@ -3,7 +3,7 @@ using TheWorms_CS_lab_Windows.assistant;
 
 namespace TheWorms_CS_lab_Windows.environment.objects.actions
 {
-    public class Move : Action
+    public class Move : Activity
     {
         public override EnvironmentObject DoAction(Direction? direction = null)
         {
