@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TheWorms_CS_lab_Windows.assistant;
 using TheWorms_CS_lab_Windows.environment.objects;
+using TheWorms_CS_lab_Windows.environment.objects.actions;
 using TheWorms_CS_lab_Windows.services;
 
 namespace TheWorms_CS_lab_Windows.environment
@@ -22,6 +24,7 @@ namespace TheWorms_CS_lab_Windows.environment
             IntellectualService intellectualService
         ) {
             _objects = new List<EnvironmentObject>();
+            _newCreated = new List<EnvironmentObject>();
             _foodService = foodService;
             _nameService = nameService;
             _intellectualService = intellectualService;
@@ -54,7 +57,7 @@ namespace TheWorms_CS_lab_Windows.environment
                     }
                 }
             } while (!spaceIsFree);
-            _objects.Add(new Worm(posX, posY, _nameService.GetName("NoParent", 0), _nameService, _intellectualService));
+            _objects.Add(new Worm(posX, posY, _nameService.GetName("NoParent", 0), _nameService, _intellectualService, this));
         }
 
         public void Update(int turn)
@@ -63,13 +66,10 @@ namespace TheWorms_CS_lab_Windows.environment
             CreateFood();
             foreach (var environmentObject in _objects)
             {
-                EnvironmentObject updateResult = environmentObject.Update(turn);
-                if (updateResult != null)
+                EnvironmentObject? updateResult = environmentObject.Update(turn);
+                if (updateResult is not null && FindInThisPlace(updateResult.PosX, updateResult.PosY) == null)
                 {
-                    if (FindInThisPlace(updateResult.PosX, updateResult.PosY) == null)
-                    {
-                        _newCreated.Add(updateResult);
-                    }
+                    _newCreated.Add(updateResult);
                 }
             }
             Assimilate();
@@ -115,7 +115,7 @@ namespace TheWorms_CS_lab_Windows.environment
             return $"({wormsCount}){wormsString}, {foodsString}";
         }
 
-        private EnvironmentObject FindInThisPlace(int posX, int posY)
+        private EnvironmentObject? FindInThisPlace(int posX, int posY)
         {
             return _objects.FirstOrDefault(someObject => someObject.PosX == posX && someObject.PosY == posY);
         }
@@ -132,13 +132,13 @@ namespace TheWorms_CS_lab_Windows.environment
 
         private void Assimilate()
         {
-            List<EnvironmentObject> worms = _objects.Where(someObject => someObject is Worm).ToList();
-            List<EnvironmentObject> foods = _objects.Where(someObject => someObject is Food).ToList();
-            List<EnvironmentObject> ateFood = new List<EnvironmentObject>();
-            foreach (EnvironmentObject worm in worms)
+            var worms = _objects.Where(someObject => someObject is Worm).ToList();
+            var foods = _objects.Where(someObject => someObject is Food).ToList();
+            var ateFood = new List<EnvironmentObject>();
+            foreach (EnvironmentObject? worm in worms)
             {
-                EnvironmentObject result = null;
-                foreach (EnvironmentObject food in foods)
+                EnvironmentObject? result = null;
+                foreach (EnvironmentObject? food in foods)
                 {
                     if (food.PosX == worm.PosX && food.PosY == worm.PosY)
                     {
@@ -154,6 +154,32 @@ namespace TheWorms_CS_lab_Windows.environment
                 }
             }
             _objects.RemoveAll(someObject => ateFood.Contains(someObject));
+        }
+
+        public Direction FindDirectionForNearestFood(Worm worm)
+        {
+            var food = _objects.Where(someObject => someObject is Food);
+            var nearestFood = food.FirstOrDefault();
+            if (nearestFood != null)
+            {
+                var distant = Math.Abs(nearestFood.PosX - worm.PosX) + Math.Abs(nearestFood.PosY - worm.PosY);
+                foreach (var environmentObject in food)
+                {
+                    var newDistant = Math.Abs(environmentObject.PosX - worm.PosX) +
+                                     Math.Abs(environmentObject.PosY - worm.PosY);
+                    if (newDistant < distant)
+                    {
+                        nearestFood = environmentObject;
+                        distant = newDistant;
+                    }
+                }
+
+                if (nearestFood.PosX > worm.PosX) return Direction.Right;
+                if (nearestFood.PosX < worm.PosX) return Direction.Left;
+                if (nearestFood.PosY > worm.PosY) return Direction.Up;
+                if (nearestFood.PosY < worm.PosY) return Direction.Down;
+            }
+            return DirectionGenerator.Generate();
         }
     }
 }

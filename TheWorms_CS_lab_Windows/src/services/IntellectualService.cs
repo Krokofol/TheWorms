@@ -9,7 +9,14 @@ namespace TheWorms_CS_lab_Windows.services
 
         public Activity CreateAction(int leftTurns, int turn, Worm worm)
         {
-            return leftTurns > 20 ? (Activity) new Multiply(worm, turn) : new Move(worm, turn);
+            if (leftTurns > 20)
+            {
+                return new Multiply(worm, turn);
+            }
+            else
+            {
+                return new Move(worm, turn, worm.GetLandSpace().FindDirectionForNearestFood(worm));
+            }
         }
     }
 }

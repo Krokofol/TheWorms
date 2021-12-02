@@ -28,7 +28,7 @@ namespace TheWorms_CS_lab_Windows.environment
             LeftTurns += 10;
         }
         
-        public virtual EnvironmentObject Update(int turn)
+        public virtual EnvironmentObject? Update(int turn)
         {
             return null;
         }

@@ -11,7 +11,7 @@ namespace TheWorms_CS_lab_Windows.environment.objects
             return $"({PosX.ToString()}, {PosY.ToString()})";
         }
 
-        public override EnvironmentObject Update(int turn)
+        public override EnvironmentObject? Update(int turn)
         {
             LeftTurns--;
             return null;
