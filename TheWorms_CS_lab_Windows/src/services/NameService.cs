@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TheWorms_CS_lab_Windows.services
@@ -28,7 +29,7 @@ namespace TheWorms_CS_lab_Windows.services
             return FindFreeName() ?? $"{parentName}I{turn.ToString()}";
         }
 
-        private string FindFreeName()
+        private String? FindFreeName()
         {
             if (_names.Count <= 0) return null;
             var freeName = _names.First();

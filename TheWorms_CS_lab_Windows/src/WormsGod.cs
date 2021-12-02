@@ -13,8 +13,8 @@ namespace TheWorms_CS_lab_Windows
         private readonly NameService _nameService;
         private readonly ReportService _reportService;
         
-        private LandSpace _landSpace;
-        private Time _time;
+        private readonly LandSpace _landSpace;
+        private readonly Time _time;
         
         private const string Name = "Worms God";
 
@@ -28,19 +28,19 @@ namespace TheWorms_CS_lab_Windows
             _intellectualService = intellectualService;
             _nameService = nameService;
             _reportService = reportService;
+            _landSpace = CreateWorld();
+            _time = CreateTime();
+            CreateLife();
         }
         
         public void DoGodsJob()
         {
-            CreateWorld();
-            CreateLife();
-            CreateTime();
             RunTime();
         }
 
-        private void CreateWorld()
+        private LandSpace CreateWorld()
         {
-            _landSpace = new LandSpace(_foodService, _nameService, _intellectualService);
+            return new LandSpace(_foodService, _nameService, _intellectualService);
         }
 
         private void CreateLife()
@@ -51,9 +51,9 @@ namespace TheWorms_CS_lab_Windows
             _landSpace.CreateWorms(wormsCount);
         }
 
-        private void CreateTime()
+        private Time CreateTime()
         {
-            _time = new Time(_landSpace, _reportService);
+            return new Time(_landSpace, _reportService);
         }
 
         private void RunTime()

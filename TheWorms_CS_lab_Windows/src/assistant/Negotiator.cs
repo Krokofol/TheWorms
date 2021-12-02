@@ -11,7 +11,7 @@ namespace TheWorms_CS_lab_Windows.assistant
         {
             string defaultValueText = defaultValue != null ? $"({defaultValue})" : "";
             Console.Write($"{speakerName ?? "Unknown"}: {text ?? "(something stupid)"} {defaultValueText}\nYou: ");
-            string result = null;
+            String? result = null;
             do
             {
                 if (result != null)
