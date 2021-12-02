@@ -12,14 +12,19 @@ namespace TheWorms_CS_lab_Windows.environment
         private readonly List<EnvironmentObject> _objects;
         private readonly NameService _nameService;
         private readonly FoodService _foodService;
+        private readonly IntellectualService _intellectualService;
 
         private List<EnvironmentObject> _newCreated;
      
-        public LandSpace()
-        {
+        public LandSpace(
+            FoodService foodService,
+            NameService nameService,
+            IntellectualService intellectualService
+        ) {
             _objects = new List<EnvironmentObject>();
-            _nameService = new NameService();
-            _foodService = new FoodService();
+            _foodService = foodService;
+            _nameService = nameService;
+            _intellectualService = intellectualService;
         }
 
         public void CreateWorms(int wormsCount)
@@ -49,7 +54,7 @@ namespace TheWorms_CS_lab_Windows.environment
                     }
                 }
             } while (!spaceIsFree);
-            _objects.Add(new Worm(posX, posY, _nameService.GetName("NoParent", 0), _nameService, new IntellectualService()));
+            _objects.Add(new Worm(posX, posY, _nameService.GetName("NoParent", 0), _nameService, _intellectualService));
         }
 
         public void Update(int turn)

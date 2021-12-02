@@ -2,17 +2,33 @@ using System;
 using System.Text.RegularExpressions;
 using TheWorms_CS_lab_Windows.assistant;
 using TheWorms_CS_lab_Windows.environment;
+using TheWorms_CS_lab_Windows.services;
 
 namespace TheWorms_CS_lab_Windows
 {
     public class WormsGod
     {
+        private readonly FoodService _foodService;
+        private readonly IntellectualService _intellectualService;
+        private readonly NameService _nameService;
+        private readonly ReportService _reportService;
+        
         private LandSpace _landSpace;
         private Time _time;
         
         private const string Name = "Worms God";
 
-        public WormsGod() {}
+        public WormsGod(
+            FoodService foodService,
+            IntellectualService intellectualService,
+            NameService nameService,
+            ReportService reportService
+        ) {
+            _foodService = foodService;
+            _intellectualService = intellectualService;
+            _nameService = nameService;
+            _reportService = reportService;
+        }
         
         public void DoGodsJob()
         {
@@ -24,7 +40,7 @@ namespace TheWorms_CS_lab_Windows
 
         private void CreateWorld()
         {
-            _landSpace = new LandSpace();
+            _landSpace = new LandSpace(_foodService, _nameService, _intellectualService);
         }
 
         private void CreateLife()
@@ -37,7 +53,7 @@ namespace TheWorms_CS_lab_Windows
 
         private void CreateTime()
         {
-            _time = new Time(_landSpace);
+            _time = new Time(_landSpace, _reportService);
         }
 
         private void RunTime()
