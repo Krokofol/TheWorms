@@ -11,12 +11,13 @@ namespace TheWorms_CS_lab_Windows.environment.objects
         private readonly NameService _nameService;
         private readonly IntellectualService _intellectualService;
 
-        public Worm(int posX, int posY, string name, NameService nameService, IntellectualService intellectualService, LandSpace landSpace) : base(posX, posY)
+        public Worm(int posX, int posY, string name, NameService nameService, IntellectualService intellectualService, LandSpace landSpace, int? leftTurns = null) : base(posX, posY)
         {
             _name = name;
             _landSpace = landSpace;
             _nameService = nameService;
             _intellectualService = intellectualService;
+            if(leftTurns is not null) LeftTurns = (int) leftTurns;
         }
 
         public override string ToString()
