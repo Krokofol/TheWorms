@@ -30,9 +30,11 @@ namespace TheWorms_CS_lab_Windows_Test
         {
             _landSpace.Objects.Clear();
             var worm = new Worm(0, 0, "Move-or-die", _nameService, _intellectualService, _landSpace);
-            var food = new Food(0, 2);
+            var nearestFood = new Food(0, 2);
+            var farthestFood = new Food(0, -3);
             _landSpace.Objects.Add(worm);
-            _landSpace.Objects.Add(food);
+            _landSpace.Objects.Add(farthestFood);
+            _landSpace.Objects.Add(nearestFood);
             _landSpace.Update(1);
             Assert.AreEqual(0, worm.PosX);
             Assert.AreEqual(1, worm.PosY);
@@ -43,9 +45,11 @@ namespace TheWorms_CS_lab_Windows_Test
         {
             _landSpace.Objects.Clear();
             var worm = new Worm(0, 0, "Move-or-die", _nameService, _intellectualService, _landSpace);
-            var food = new Food(0, -2);
+            var nearestFood = new Food(0, -2);
+            var farthestFood = new Food(0, 3);
             _landSpace.Objects.Add(worm);
-            _landSpace.Objects.Add(food);
+            _landSpace.Objects.Add(farthestFood);
+            _landSpace.Objects.Add(nearestFood);
             _landSpace.Update(1);
             Assert.AreEqual(0, worm.PosX);
             Assert.AreEqual(-1, worm.PosY);
@@ -56,9 +60,11 @@ namespace TheWorms_CS_lab_Windows_Test
         {
             _landSpace.Objects.Clear();
             var worm = new Worm(0, 0, "Move-or-die", _nameService, _intellectualService, _landSpace);
-            var food = new Food(2, 0);
+            var nearestFood = new Food(2, 0);
+            var farthestFood = new Food(-3, 0);
             _landSpace.Objects.Add(worm);
-            _landSpace.Objects.Add(food);
+            _landSpace.Objects.Add(farthestFood);
+            _landSpace.Objects.Add(nearestFood);
             _landSpace.Update(1);
             Assert.AreEqual(1, worm.PosX);
             Assert.AreEqual(0, worm.PosY);
@@ -69,9 +75,11 @@ namespace TheWorms_CS_lab_Windows_Test
         {
             _landSpace.Objects.Clear();
             var worm = new Worm(0, 0, "Move-or-die", _nameService, _intellectualService, _landSpace);
-            var food = new Food(-2, 0);
+            var nearestFood = new Food(-2, 0);
+            var farthestFood = new Food(3, 0);
             _landSpace.Objects.Add(worm);
-            _landSpace.Objects.Add(food);
+            _landSpace.Objects.Add(farthestFood);
+            _landSpace.Objects.Add(nearestFood);
             _landSpace.Update(1);
             Assert.AreEqual(-1, worm.PosX);
             Assert.AreEqual(0, worm.PosY);
