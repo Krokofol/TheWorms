@@ -18,13 +18,13 @@ namespace TheWorms_CS_lab_Windows_Test
         [Test]
         public void UniqNameTest()
         {
-            var namesArray = new List<String>();
+            var namesArray = new List<string>();
             namesArray.Add(_nameService.GetName("firstName", 0));
             var turn = 0;
-            while (namesArray.Count < Math.Pow(2, 17))
+            while (namesArray.Count < Math.Pow(2, 16))
             {
                 turn++;
-                var newNamesArray = new List<String>();
+                var newNamesArray = new List<string>();
                 foreach (var name in namesArray)
                 {
                     var newName = _nameService.GetName(name, turn);
@@ -37,7 +37,7 @@ namespace TheWorms_CS_lab_Windows_Test
                     namesArray.Add(name);
                 }
             }
-            Assert.AreEqual(131072, namesArray.Count);
+            Assert.AreEqual(65536, namesArray.Count);
         }
     }
 }

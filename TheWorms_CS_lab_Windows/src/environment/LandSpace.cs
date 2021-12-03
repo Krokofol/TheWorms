@@ -13,7 +13,7 @@ namespace TheWorms_CS_lab_Windows.environment
         
         public readonly List<EnvironmentObject> Objects;
         private readonly NameService _nameService;
-        private readonly FoodService _foodService;
+        private FoodService FoodService { get; set; }
         private readonly DirectionService _directionService;
         private readonly IntellectualService _intellectualService;
 
@@ -27,7 +27,7 @@ namespace TheWorms_CS_lab_Windows.environment
         ) {
             Objects = new List<EnvironmentObject>();
             _newCreated = new List<EnvironmentObject>();
-            _foodService = foodService;
+            FoodService = foodService;
             _nameService = nameService;
             _directionService = directionService;
             _intellectualService = intellectualService;
@@ -125,14 +125,14 @@ namespace TheWorms_CS_lab_Windows.environment
 
         private void CreateFood()
         {
-            Food? food = _foodService.CreateFood();
+            Food? food = FoodService.CreateFood();
             if (food == null)
             {
                 return;
             }
-            while (FindInThisPlace(food!.PosX, food.PosY) != null)
+            while (FindInThisPlace(food!.PosX, food.PosY) is not null && FindInThisPlace(food.PosX, food.PosY) is not Worm)
             {
-                food = _foodService.CreateFood();
+                food = FoodService.CreateFood();
             }
             Objects.Add(food);
         }

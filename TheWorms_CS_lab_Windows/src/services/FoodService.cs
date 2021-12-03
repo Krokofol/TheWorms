@@ -5,7 +5,7 @@ namespace TheWorms_CS_lab_Windows.services
 {
     public class FoodService
     {
-        protected readonly Random _generator;
+        private readonly Random _generator;
 
         public FoodService()
         {
@@ -18,7 +18,7 @@ namespace TheWorms_CS_lab_Windows.services
         }
 
 
-        protected int NextNormal(Random r, double mu = 0, double sigma = 1)
+        private int NextNormal(Random r, double mu = 0, double sigma = 1)
         {
             var u1 = r.NextDouble();
             var u2 = r.NextDouble();
