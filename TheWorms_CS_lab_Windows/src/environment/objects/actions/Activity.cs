@@ -7,12 +7,11 @@ namespace TheWorms_CS_lab_Windows.environment.objects.actions
         protected readonly Worm Worm;
         protected readonly int Turn;
         protected readonly Direction Direction;
-
-        protected Activity(Worm worm, int turn, Direction? direction)
+        protected Activity(Worm worm, int turn, Direction direction)
         {
             Worm = worm;
             Turn = turn;
-            Direction = direction ?? DirectionGenerator.Generate();
+            Direction = direction;
         }
         public abstract EnvironmentObject? DoAction();
     }

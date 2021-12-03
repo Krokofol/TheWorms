@@ -12,6 +12,7 @@ namespace TheWorms_CS_lab_Windows
         private readonly IntellectualService _intellectualService;
         private readonly NameService _nameService;
         private readonly ReportService _reportService;
+        private readonly DirectionService _directionService;
         
         private readonly LandSpace _landSpace;
         private readonly Time _time;
@@ -22,12 +23,14 @@ namespace TheWorms_CS_lab_Windows
             FoodService foodService,
             IntellectualService intellectualService,
             NameService nameService,
-            ReportService reportService
+            ReportService reportService,
+            DirectionService directionService
         ) {
             _foodService = foodService;
             _intellectualService = intellectualService;
             _nameService = nameService;
             _reportService = reportService;
+            _directionService = directionService;
             _landSpace = CreateWorld();
             _time = CreateTime();
             CreateLife();
@@ -40,7 +43,7 @@ namespace TheWorms_CS_lab_Windows
 
         private LandSpace CreateWorld()
         {
-            return new LandSpace(_foodService, _nameService, _intellectualService);
+            return new LandSpace(_foodService, _nameService, _directionService, _intellectualService);
         }
 
         private void CreateLife()

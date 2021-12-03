@@ -33,7 +33,7 @@ namespace TheWorms_CS_lab_Windows.environment.objects.actions
             return null;
         }
 
-        public Move(Worm worm, int turn, Direction? direction = null) : base(worm, turn, direction)
+        public Move(Worm worm, int turn, Direction direction) : base(worm, turn, direction)
         {
         }
     }

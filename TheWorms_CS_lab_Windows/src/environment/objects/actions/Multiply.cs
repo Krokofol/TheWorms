@@ -29,6 +29,6 @@ namespace TheWorms_CS_lab_Windows.environment.objects.actions
             return new Worm(newPosX, newPosY, Worm.GetBabyName(Turn), Worm.GetNameService(), Worm.GetBrains(), Worm.GetLandSpace());
         }
 
-        public Multiply(Worm worm, int turn, Direction? direction = null) : base(worm, turn, direction) {}
+        public Multiply(Worm worm, int turn, Direction direction) : base(worm, turn, direction) {}
     }
 }

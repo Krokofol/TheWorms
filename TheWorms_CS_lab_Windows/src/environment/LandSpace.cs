@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TheWorms_CS_lab_Windows.assistant;
 using TheWorms_CS_lab_Windows.environment.objects;
 using TheWorms_CS_lab_Windows.environment.objects.actions;
 using TheWorms_CS_lab_Windows.services;
@@ -14,6 +13,7 @@ namespace TheWorms_CS_lab_Windows.environment
         private readonly List<EnvironmentObject> _objects;
         private readonly NameService _nameService;
         private readonly FoodService _foodService;
+        private readonly DirectionService _directionService;
         private readonly IntellectualService _intellectualService;
 
         private List<EnvironmentObject> _newCreated;
@@ -21,12 +21,14 @@ namespace TheWorms_CS_lab_Windows.environment
         public LandSpace(
             FoodService foodService,
             NameService nameService,
+            DirectionService directionService,
             IntellectualService intellectualService
         ) {
             _objects = new List<EnvironmentObject>();
             _newCreated = new List<EnvironmentObject>();
             _foodService = foodService;
             _nameService = nameService;
+            _directionService = directionService;
             _intellectualService = intellectualService;
         }
 
@@ -158,7 +160,7 @@ namespace TheWorms_CS_lab_Windows.environment
 
         public Direction FindDirectionForNearestFood(Worm worm)
         {
-            var food = _objects.Where(someObject => someObject is Food);
+            var food = _objects.Where(someObject => someObject is Food).ToArray();
             var nearestFood = food.FirstOrDefault();
             if (nearestFood != null)
             {
@@ -179,7 +181,7 @@ namespace TheWorms_CS_lab_Windows.environment
                 if (nearestFood.PosY > worm.PosY) return Direction.Up;
                 if (nearestFood.PosY < worm.PosY) return Direction.Down;
             }
-            return DirectionGenerator.Generate();
+            return _directionService.Generate();
         }
     }
 }
