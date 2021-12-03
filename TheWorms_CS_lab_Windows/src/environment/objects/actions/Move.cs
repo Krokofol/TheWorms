@@ -27,9 +27,11 @@ namespace TheWorms_CS_lab_Windows.environment.objects.actions
             }
             
             Worm.LeftTurns--;
+
+            var someObject = LandSpace.FindInThisPlace(newPosX, newPosY);
+            if (someObject is not null && someObject is not Food) return null;
             Worm.PosX = newPosX;
             Worm.PosY = newPosY;
-
             return null;
         }
 

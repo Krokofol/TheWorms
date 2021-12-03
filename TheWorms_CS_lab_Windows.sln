@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWorms_CS_lab_Windows", "TheWorms_CS_lab_Windows\TheWorms_CS_lab_Windows.csproj", "{33562E76-2E35-4051-8978-A3BD0B6F0116}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheWorms_CS_lab_Windows_Test", "TheWorms_CS_lab_Windows_Test\TheWorms_CS_lab_Windows_Test.csproj", "{DE627391-CF4B-46CD-B5DC-841E94085789}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{33562E76-2E35-4051-8978-A3BD0B6F0116}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33562E76-2E35-4051-8978-A3BD0B6F0116}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33562E76-2E35-4051-8978-A3BD0B6F0116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE627391-CF4B-46CD-B5DC-841E94085789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE627391-CF4B-46CD-B5DC-841E94085789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE627391-CF4B-46CD-B5DC-841E94085789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE627391-CF4B-46CD-B5DC-841E94085789}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

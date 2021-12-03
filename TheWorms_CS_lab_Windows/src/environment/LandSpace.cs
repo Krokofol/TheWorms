@@ -10,7 +10,8 @@ namespace TheWorms_CS_lab_Windows.environment
 {
     public class LandSpace
     {
-        private readonly List<EnvironmentObject> _objects;
+        
+        public readonly List<EnvironmentObject> Objects;
         private readonly NameService _nameService;
         private readonly FoodService _foodService;
         private readonly DirectionService _directionService;
@@ -24,7 +25,7 @@ namespace TheWorms_CS_lab_Windows.environment
             DirectionService directionService,
             IntellectualService intellectualService
         ) {
-            _objects = new List<EnvironmentObject>();
+            Objects = new List<EnvironmentObject>();
             _newCreated = new List<EnvironmentObject>();
             _foodService = foodService;
             _nameService = nameService;
@@ -51,7 +52,7 @@ namespace TheWorms_CS_lab_Windows.environment
                 posX = generator.Next(- fieldSizeX / 2, fieldSizeX / 2);
                 posY = generator.Next(- fieldSizeY / 2, fieldSizeY / 2);
                 spaceIsFree = true;
-                foreach (var environmentObject in _objects)
+                foreach (var environmentObject in Objects)
                 {
                     if (environmentObject.PosX == posX && environmentObject.PosY == posY)
                     {
@@ -59,14 +60,14 @@ namespace TheWorms_CS_lab_Windows.environment
                     }
                 }
             } while (!spaceIsFree);
-            _objects.Add(new Worm(posX, posY, _nameService.GetName("NoParent", 0), _nameService, _intellectualService, this));
+            Objects.Add(new Worm(posX, posY, _nameService.GetName("NoParent", 0), _nameService, _intellectualService, this));
         }
 
         public void Update(int turn)
         {
             _newCreated = new List<EnvironmentObject>();
             CreateFood();
-            foreach (var environmentObject in _objects)
+            foreach (var environmentObject in Objects)
             {
                 EnvironmentObject? updateResult = environmentObject.Update(turn);
                 if (updateResult is not null && FindInThisPlace(updateResult.PosX, updateResult.PosY) == null)
@@ -75,10 +76,10 @@ namespace TheWorms_CS_lab_Windows.environment
                 }
             }
             Assimilate();
-            _objects.RemoveAll(someObject => someObject.IsOutdated());
+            Objects.RemoveAll(someObject => someObject.IsOutdated());
             foreach (var environmentObject in _newCreated)
             {
-                _objects.Add(environmentObject);
+                Objects.Add(environmentObject);
             }
         }
 
@@ -89,7 +90,7 @@ namespace TheWorms_CS_lab_Windows.environment
             int wormsCount = 0;
             bool notFirstWorm = false;
             bool notFirstFood = false;
-            foreach (var environmentObject in _objects)
+            foreach (var environmentObject in Objects)
             {
                 if (environmentObject is Worm)
                 {
@@ -117,25 +118,29 @@ namespace TheWorms_CS_lab_Windows.environment
             return $"({wormsCount}){wormsString}, {foodsString}";
         }
 
-        private EnvironmentObject? FindInThisPlace(int posX, int posY)
+        public EnvironmentObject? FindInThisPlace(int posX, int posY)
         {
-            return _objects.FirstOrDefault(someObject => someObject.PosX == posX && someObject.PosY == posY);
+            return Objects.FirstOrDefault(someObject => someObject.PosX == posX && someObject.PosY == posY);
         }
 
         private void CreateFood()
         {
-            Food food = _foodService.CreateFood();
-            while (FindInThisPlace(food.PosX, food.PosY) != null)
+            Food? food = _foodService.CreateFood();
+            if (food == null)
+            {
+                return;
+            }
+            while (FindInThisPlace(food!.PosX, food.PosY) != null)
             {
                 food = _foodService.CreateFood();
             }
-            _objects.Add(food);
+            Objects.Add(food);
         }
 
         private void Assimilate()
         {
-            var worms = _objects.Where(someObject => someObject is Worm).ToList();
-            var foods = _objects.Where(someObject => someObject is Food).ToList();
+            var worms = Objects.Where(someObject => someObject is Worm).ToList();
+            var foods = Objects.Where(someObject => someObject is Food).ToList();
             var ateFood = new List<EnvironmentObject>();
             foreach (EnvironmentObject? worm in worms)
             {
@@ -155,12 +160,12 @@ namespace TheWorms_CS_lab_Windows.environment
                     worm.Assimilate();
                 }
             }
-            _objects.RemoveAll(someObject => ateFood.Contains(someObject));
+            Objects.RemoveAll(someObject => ateFood.Contains(someObject));
         }
 
         public Direction FindDirectionForNearestFood(Worm worm)
         {
-            var food = _objects.Where(someObject => someObject is Food).ToArray();
+            var food = Objects.Where(someObject => someObject is Food).ToArray();
             var nearestFood = food.FirstOrDefault();
             if (nearestFood != null)
             {

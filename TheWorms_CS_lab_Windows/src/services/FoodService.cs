@@ -5,20 +5,20 @@ namespace TheWorms_CS_lab_Windows.services
 {
     public class FoodService
     {
-        private readonly Random _generator;
+        protected readonly Random _generator;
 
         public FoodService()
         {
             _generator = new Random(DateTime.Now.Millisecond);
         }
 
-        public Food CreateFood()
+        public virtual Food? CreateFood()
         {
             return new Food(NextNormal(_generator), NextNormal(_generator));
         }
-        
-        
-        private int NextNormal(Random r, double mu = 0, double sigma = 1)
+
+
+        protected int NextNormal(Random r, double mu = 0, double sigma = 1)
         {
             var u1 = r.NextDouble();
             var u2 = r.NextDouble();

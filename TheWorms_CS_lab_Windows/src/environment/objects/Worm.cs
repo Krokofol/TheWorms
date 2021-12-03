@@ -29,9 +29,9 @@ namespace TheWorms_CS_lab_Windows.environment.objects
             return MakeAction(turn, _intellectualService.CreateAction(LeftTurns, turn, this));
         }
 
-        private EnvironmentObject? MakeAction(int turn, Activity activity)
+        private EnvironmentObject? MakeAction(int turn, Activity? activity)
         {
-            var result = activity.DoAction();
+            var result = activity?.DoAction();
             base.Update(turn);
             return result;
         }

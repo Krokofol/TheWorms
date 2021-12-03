@@ -14,7 +14,7 @@ namespace TheWorms_CS_lab_Windows.services
             _directionService = directionService;
         }
 
-        public Activity CreateAction(int leftTurns, int turn, Worm worm)
+        public virtual Activity? CreateAction(int leftTurns, int turn, Worm worm)
         {
             if (leftTurns > 20)
             {
