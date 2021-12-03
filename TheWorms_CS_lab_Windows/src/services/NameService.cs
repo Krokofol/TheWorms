@@ -24,7 +24,7 @@ namespace TheWorms_CS_lab_Windows.services
             _names = new LinkedList<string>(names);
         }
 
-        public string GetName(string parentName, int turn)
+        public String GetName(string parentName, int turn)
         {
             return FindFreeName() ?? $"{parentName}I{turn.ToString()}";
         }
