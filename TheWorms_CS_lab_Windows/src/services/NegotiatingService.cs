@@ -1,16 +1,18 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace TheWorms_CS_lab_Windows.assistant
+namespace TheWorms_CS_lab_Windows.services
 {
-    public static class Negotiator
+    public class NegotiatingService
     {
         private const string Name = "Negotiator";
 
-        public static string Talk(string speakerName, string text, Regex tester, string defaultValue)
+        public NegotiatingService() {}
+
+        public string Talk(string speakerName, string text, Regex tester, string? defaultValue)
         {
             string defaultValueText = defaultValue != null ? $"({defaultValue})" : "";
-            Console.Write($"{speakerName ?? "Unknown"}: {text ?? "(something stupid)"} {defaultValueText}\nYou: ");
+            Console.Write($"{speakerName}: {text} {defaultValueText}\nYou: ");
             String? result = null;
             do
             {

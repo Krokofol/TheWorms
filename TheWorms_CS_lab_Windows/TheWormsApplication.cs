@@ -19,10 +19,11 @@ namespace TheWorms_CS_lab_Windows
                 {
                     serviceCollection.AddHostedService<Xelnaga>();
                     serviceCollection.AddSingleton<FoodService>();
-                    serviceCollection.AddSingleton<IntellectualService>();
                     serviceCollection.AddSingleton<NameService>();
                     serviceCollection.AddSingleton<ReportService>();
                     serviceCollection.AddSingleton<DirectionService>();
+                    serviceCollection.AddSingleton<NegotiatingService>();
+                    serviceCollection.AddSingleton<IntellectualService>();
                 });
         }
     }

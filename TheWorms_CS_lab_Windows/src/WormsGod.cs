@@ -1,6 +1,5 @@
 using System;
 using System.Text.RegularExpressions;
-using TheWorms_CS_lab_Windows.assistant;
 using TheWorms_CS_lab_Windows.environment;
 using TheWorms_CS_lab_Windows.services;
 
@@ -13,6 +12,7 @@ namespace TheWorms_CS_lab_Windows
         private readonly NameService _nameService;
         private readonly ReportService _reportService;
         private readonly DirectionService _directionService;
+        private readonly NegotiatingService _negotiatingService;
         
         private readonly LandSpace _landSpace;
         private readonly Time _time;
@@ -24,13 +24,15 @@ namespace TheWorms_CS_lab_Windows
             IntellectualService intellectualService,
             NameService nameService,
             ReportService reportService,
-            DirectionService directionService
+            DirectionService directionService,
+            NegotiatingService negotiatingService
         ) {
             _foodService = foodService;
-            _intellectualService = intellectualService;
             _nameService = nameService;
             _reportService = reportService;
             _directionService = directionService;
+            _negotiatingService = negotiatingService;
+            _intellectualService = intellectualService;
             _landSpace = CreateWorld();
             _time = CreateTime();
             CreateLife();
@@ -49,7 +51,7 @@ namespace TheWorms_CS_lab_Windows
         private void CreateLife()
         {
             Regex sizeRegex = new Regex("\\d+");
-            string usersText = Negotiator.Talk(Name, "enter the worms count", sizeRegex, "1");
+            string usersText = _negotiatingService.Talk(Name, "enter the worms count", sizeRegex, "1");
             int wormsCount = Int32.Parse(usersText);
             _landSpace.CreateWorms(wormsCount);
         }

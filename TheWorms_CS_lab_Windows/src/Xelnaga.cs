@@ -12,6 +12,7 @@ namespace TheWorms_CS_lab_Windows
         private readonly NameService _nameService;
         private readonly ReportService _reportService;
         private readonly DirectionService _directionService;
+        private readonly NegotiatingService _negotiatingService;
         
         public Xelnaga()
         {
@@ -20,6 +21,7 @@ namespace TheWorms_CS_lab_Windows
             _intellectualService = new IntellectualService(_directionService);
             _nameService = new NameService();
             _reportService = new ReportService();
+            _negotiatingService = new NegotiatingService();
         }
         
         public Task StartAsync(CancellationToken cancellationToken)
@@ -29,7 +31,8 @@ namespace TheWorms_CS_lab_Windows
                 _intellectualService,
                 _nameService,
                 _reportService,
-                _directionService
+                _directionService,
+                _negotiatingService
             );
             god.DoGodsJob();
             return Task.CompletedTask;
